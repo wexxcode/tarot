@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home component renders homepage unchanged 1`] = `
+<div>
+  <div
+    class="container container-fluid"
+  >
+    <nav>
+      <h2>
+        MEU TAROT
+      </h2>
+    </nav>
+    <main>
+      <p>
+        Carregando... Esperando a resposta do universo
+      </p>
+    </main>
+  </div>
+</div>
+`;
