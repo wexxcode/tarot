@@ -1,90 +1,90 @@
-import { useImage } from '@/hooks/useImage';
-import React, { useEffect, useState } from 'react';
-import Modal from '../Modal';
+import React, { useEffect, useState, CSSProperties } from 'react';
 
-type Card = {
-  name: string,
-  name_short: string,
-  value: string,
-  value_int: number,
-  suit: string,
-  type: string,
-  meaning_up: string,
-  meaning_rev: string,
-  desc: string,
-  
+type TarotCard = {
+  title: string;
+  subtitle: string;
+  number: string;
+  color: string;
+  description: string;
+  image: string;
+};
+
+interface CardType {
+  title: string;
+  subtitle: string;
+  number: string;
+  color: string;
+  description: string;
+  image: string;
+  background: string;
+  data: TarotCard;
 }
 
-interface SearchResult {
-  page: number;
-  per_page: number;
-      photos: [{
-        id: number;
-        width: number;
-        height: number;
-        url: string;
-        photographer: string;
-        photographer_url: string;
-        photographer_id: number;
-        avg_color: string;
-        src: {
-          original: string;
-          large2x: string;
-          large: string;
-          medium: string;
-          small: string;
-          portrait: string;
-          landscape: string;
-          tiny: string;
-        };
-        liked: boolean;
-        alt: string;
-        }
-    ],
-  total_results: number;
-  next_page: string;
-}
-
-const Card: React.FC<Card> = ({
-  name,
-  name_short,
-  value,
-  value_int,
-  suit,
-  type,
-  meaning_up,
-  meaning_rev,
-  desc,
+const Card: React.FC<CardType> = ({
+  title,
+  subtitle,
+  description,
+  background,
+  data
 }) => {
-  const [background, setBackground] = useState<SearchResult >()
-  const { data: dataImage } = useImage(`https://api.pexels.com/v1/search?query=tarot card ${name}&per_page=1`);
-  console.log('data image',dataImage);
-
-  useEffect(()=> {
-    setBackground(dataImage);
-  }, [dataImage])
-
-  console.log('meu estadoooo', background?.photos[0].src.medium);
-
-  const beforeStyle = {
-    content: "''",
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundImage: `url(${background?.photos[0].src.medium})`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-  };
-
-  const divStyle = {
-    height: '500px',
-    width: '100%',
-    color: 'white',
-    zIndex: 1000
-  };
-
+  const [respostaA, setRespostaA] = useState<string>('')
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const imagens = [
+    'aestrela.png',
+    'aforca.png',
+    'aimperatriz.png',
+    'ajustica.png',
+    'alua.png',
+    'amorte.png',
+    'arodadafortuna.png',
+    'asdepaus.png',
+    'asumasacerdotiza.png',
+    'atemperanca.png',
+    'atorre.png',
+    'cavaleirodepaus.png',
+    'cincodepaus.png',
+    'dezdepaus.png',
+    'doisdepaus.png',
+    'novedepaus.png',
+    'ocarro.png',
+    'odiabo.png',
+    'oenforcado.png',
+    'oeremita.png',
+    'oimperador.png',
+    'oitodepaus.png',
+    'ojulgamento.png',
+    'olouco.png',
+    'omago.png',
+    'omundo.png',
+    'opapa.png',
+    'osenamorads.png',
+    'osol.png',
+    'paginadepaus.png',
+    'quatrodepaus.png',
+    'rainhadepaus.png',
+    'reidepaus.png',
+    'seisdepaus.png',
+    'setedepaus.png',
+    'tresdepaus.png'
+  ];
+
+  function resposta(title: string, array: string[]): string | null {
+    const formattedTitle = title.replace(/\s+/g, '').toLowerCase();
+    const matches = array.filter(item => {
+      const formattedItem = item.replace('.png', '').toLowerCase();
+      return formattedItem.includes(formattedTitle);
+    });
+    return matches.length > 0 ? matches[0] : null;
+  }
+    
+  useEffect(()=> {
+
+    const result = resposta(data.title, imagens)
+    if (result !== null) {
+      setRespostaA(result);
+    }
+  },[])
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -92,48 +92,45 @@ const Card: React.FC<Card> = ({
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  }; 
+
+  const bgStyle: CSSProperties = {
+    width: '18rem',
+    background: background,
+  };
+
+  const beforeStyle: CSSProperties = {
+    content: '""',
+    display: 'block',
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: '100%',
+    backgroundImage: `url(${'images/'+respostaA})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    opacity: '0.4',
+    mixBlendMode: 'overlay'
+  };
+
+  const divStyle: CSSProperties = {
+    height: '500px',
+    color: 'white',
+    zIndex: 1000,
+    width: 'inherit',
   };
   
   return (
-    <section style={beforeStyle} className="card p-4 shadow">
-      <div style={divStyle}>
-        <h4>{name}</h4>
-        <h3>{name_short}</h3>
-        <span>value: {value}</span>
-        <hr />
-        <span><b>value_int:</b> {value_int}</span>
-        <hr />
-        <span><b>suit:</b> {suit}</span>
-
-        <hr />
-        <span><b>type:</b> {type}</span>
-        <hr />
-        <span style={{ overflowY: 'scroll', textOverflow: 'ellipsis', height: '77px'}}><b>meaning_up:</b> {meaning_up}</span>
-        <br />
-        <br />
-        <span style={{ overflowY: 'scroll', textOverflow: 'ellipsis', height: '77px'}}><b>meaning_rev:</b> {meaning_rev}</span>
-        <p className='d-none'>desc:  {desc}</p>
-        <button onClick={handleOpenModal}>Mais informações</button>
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal} title="Informações adicionais">
-        <div style={{color: 'black'}}>
-        <h4>{name}</h4>
-        <h3>{name_short}</h3>
-        <span>value: {value}</span>
-        <hr />
-        <span><b>value_int:</b> {value_int}</span>
-        <hr />
-        <span><b>suit:</b> {suit}</span>
-
-        <hr />
-        <span><b>type:</b> {type}</span>
-        <hr />
-        <span><b>meaning_up:</b> {meaning_up}</span>
-        <br />
-        <br />
-        <span><b>meaning_rev:</b> {meaning_rev}</span>
-        <p>desc:  {desc}</p>
-      </div>
-        </Modal>
+    <section className="card m-3 shadow rounded" style={bgStyle}>
+      <div style={beforeStyle} className="shadow-lg shadow-inset"></div>
+      <div style={divStyle} className="p-3 p-md-4">
+        <header className="d-flex flex-column justify-content-end" style={{height: '75px'}}>
+          <h3 className="card-title">{title}</h3>
+        </header>
+        <hr className="bg-danger" />
+        <h5>{subtitle}</h5>
+        <p>{description}</p>
       </div>
     </section>
   )

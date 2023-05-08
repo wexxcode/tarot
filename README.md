@@ -1,30 +1,36 @@
-# Next.js + Jest
+### Tarot Cards
 
-This example shows how to configure Jest to work with Next.js.
+## Pré-requisitos
 
-This includes Next.js' built-in support for Global CSS, CSS Modules and TypeScript.
+Para rodar esse projeto, você precisa ter instalado em sua máquina:
 
-## How to Use
+- Node.js
+- NPM ou Yarn
 
-Quickly get started using [Create Next App](https://github.com/vercel/next.js/tree/canary/packages/create-next-app#readme)!
+# Instalação
 
-In your terminal, run the following command:
+Para instalar as dependências, execute o comando:
 
-```bash
-npx create-next-app --example with-jest with-jest-app
-```
+npm install ou yarn install
 
-```bash
-yarn create next-app --example with-jest with-jest-app
-```
+# Como rodar
 
-```bash
-pnpm create next-app --example with-jest with-jest-app
-```
+Para rodar o projeto em ambiente de desenvolvimento, execute o comando:
 
-## Run Jest Tests
+npm run dev ou yarn dev
 
-```bash
-npm test
-```
-# tarot
+
+Para gerar uma build para produção, execute o comando:
+
+npm run build ou yarn build
+Para rodar o projeto em produção, execute o comando:
+
+npm run start ou yarn start
+
+# Como testar
+
+Para rodar os testes, execute o comando:
+
+npm run test ou yarn test
+
+
