@@ -7,9 +7,9 @@ import Header from '@/components/Header'
 
 export default function Home() {
   return (
-    <div className={`${styles.container} container-fluid`}>
+    <div className={`container-fluid px-0`}>
       <Header titulo="MEU TAROT" name="Lazaro" />
-      <main>  
+      <main className="w-100">  
         <CardLIst />
       </main>
     </div>
