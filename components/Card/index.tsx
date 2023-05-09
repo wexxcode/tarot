@@ -1,4 +1,5 @@
 import React, { useEffect, useState, CSSProperties } from 'react';
+import { imagens } from 'data';
 
 type TarotCard = {
   title: string;
@@ -7,6 +8,7 @@ type TarotCard = {
   color: string;
   description: string;
   image: string;
+  suit: string;
 };
 
 interface CardType {
@@ -17,60 +19,26 @@ interface CardType {
   description: string;
   image: string;
   background: string;
+  suit: string;
   data: TarotCard;
 }
 
 const Card: React.FC<CardType> = ({
   title,
   subtitle,
+  number,
+  color,
   description,
+  image,
   background,
+  suit,
   data
 }) => {
-  const [respostaA, setRespostaA] = useState<string>('')
+  const [backgroundCard, setBackgroundCard] = useState<string>('')
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const imagens = [
-    'aestrela.png',
-    'aforca.png',
-    'aimperatriz.png',
-    'ajustica.png',
-    'alua.png',
-    'amorte.png',
-    'arodadafortuna.png',
-    'asdepaus.png',
-    'asumasacerdotiza.png',
-    'atemperanca.png',
-    'atorre.png',
-    'cavaleirodepaus.png',
-    'cincodepaus.png',
-    'dezdepaus.png',
-    'doisdepaus.png',
-    'novedepaus.png',
-    'ocarro.png',
-    'odiabo.png',
-    'oenforcado.png',
-    'oeremita.png',
-    'oimperador.png',
-    'oitodepaus.png',
-    'ojulgamento.png',
-    'olouco.png',
-    'omago.png',
-    'omundo.png',
-    'opapa.png',
-    'osenamorads.png',
-    'osol.png',
-    'paginadepaus.png',
-    'quatrodepaus.png',
-    'rainhadepaus.png',
-    'reidepaus.png',
-    'seisdepaus.png',
-    'setedepaus.png',
-    'tresdepaus.png'
-  ];
-
-  function resposta(title: string, array: string[]): string | null {
-    const formattedTitle = title.replace(/\s+/g, '').toLowerCase();
+  function imageListComparison(title: string, array: string[]): string | null {
+    const formattedTitle = title.toLowerCase().replace(/\s+/g, '').replace(/ç/g, "c").replace(/á/g, "a").replace(/ê/g, "e");
     const matches = array.filter(item => {
       const formattedItem = item.replace('.png', '').toLowerCase();
       return formattedItem.includes(formattedTitle);
@@ -80,9 +48,9 @@ const Card: React.FC<CardType> = ({
     
   useEffect(()=> {
 
-    const result = resposta(data.title, imagens)
+    const result = imageListComparison(data.title, imagens)
     if (result !== null) {
-      setRespostaA(result);
+      setBackgroundCard(result);
     }
   },[])
 
@@ -107,12 +75,14 @@ const Card: React.FC<CardType> = ({
     left: '0',
     width: '100%',
     height: '100%',
-    backgroundImage: `url(${'images/'+respostaA})`,
+    backgroundImage: `url(${'images/'+backgroundCard})`,
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
     opacity: '0.4',
     mixBlendMode: 'overlay'
   };
+
+  const changeColor = background === '#d4d796' ? '#0d0828' : 'white'
 
   const divStyle: CSSProperties = {
     height: '500px',
@@ -126,11 +96,12 @@ const Card: React.FC<CardType> = ({
       <div style={beforeStyle} className="shadow-lg shadow-inset"></div>
       <div style={divStyle} className="p-3 p-md-4">
         <header className="d-flex flex-column justify-content-end" style={{height: '75px'}}>
-          <h3 className="card-title">{title}</h3>
+          <span>{suit}</span>
+          <h3 className="card-title" style={{color: changeColor}}>{title}</h3>
         </header>
         <hr className="bg-danger" />
-        <h5>{subtitle}</h5>
-        <p>{description}</p>
+        <h5 style={{color: changeColor}}>{subtitle}</h5>
+        <p style={{color: changeColor}}>{description}</p>
       </div>
     </section>
   )

@@ -1,4 +1,4 @@
-### Tarot Cards
+# Tarot Cards
 
 ## Pré-requisitos
 
@@ -7,13 +7,13 @@ Para rodar esse projeto, você precisa ter instalado em sua máquina:
 - Node.js
 - NPM ou Yarn
 
-# Instalação
+## Instalação
 
 Para instalar as dependências, execute o comando:
 
 npm install ou yarn install
 
-# Como rodar
+## Como rodar
 
 Para rodar o projeto em ambiente de desenvolvimento, execute o comando:
 
@@ -27,10 +27,12 @@ Para rodar o projeto em produção, execute o comando:
 
 npm run start ou yarn start
 
-# Como testar
+## Como testar
 
 Para rodar os testes, execute o comando:
 
 npm run test ou yarn test
+
+
 
 

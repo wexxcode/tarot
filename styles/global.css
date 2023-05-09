@@ -17,6 +17,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #261E54;
 }
 
 footer {
