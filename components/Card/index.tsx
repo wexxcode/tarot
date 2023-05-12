@@ -1,5 +1,6 @@
 import React, { useEffect, useState, CSSProperties } from 'react';
 import { imagens } from 'data';
+import Modal from '../Modal';
 
 type TarotCard = {
   title: string;
@@ -102,7 +103,15 @@ const Card: React.FC<CardType> = ({
         <hr className="bg-danger" />
         <h5 style={{color: changeColor}}>{subtitle}</h5>
         <p style={{color: changeColor}}>{description}</p>
+        <button
+          onClick={handleOpenModal}
+          type="button" 
+          style={{position: 'absolute',bottom: '40px', background: '#261e53', border: '#261e53'}}
+          className="btn btn-primary mt-auto w-auto">Ver Detalhes</button>
       </div>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} >
+        <p>{description}</p>
+      </Modal>
     </section>
   )
 }

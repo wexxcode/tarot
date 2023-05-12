@@ -1,18 +1,20 @@
 import React from 'react';
 
 interface IHeader {
-  titulo: string;
-  name?: string;
+  title: string;
 }
 
 const Header: React.FC<IHeader> = ({
-  titulo,
-  name
+  title
 }) => {
   return(
-    <nav>
-      <h2>{titulo}</h2>
-    </nav>
+    <header>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <div className="container">
+          <div className="navbar-brand mx-auto order-lg-1">{title}</div>
+        </div>
+      </nav>
+    </header>
   )
 }
 
