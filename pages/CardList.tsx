@@ -1,6 +1,7 @@
 import Card from "@/components/Card"
+import { AuthContext } from "contexts/AuthContext"
 import { cardsMock } from "data"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 
 const CardLIst: React.FC = () => {
   const [colors, setColors] = useState(['#0c0e1a', '#182239', '#233239', '#364b4b', '#84937d', '#5f7263', '#729677', '#88a759', '#63996e', '#d4d796'])
