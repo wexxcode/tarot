@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import { parseCookies } from "nookies"
 import { api } from "services/api"
 import { getApiClient } from "services/axios"
+import Loading from "@/components/Loading"
 
 export default function CardLIst() {
   const [colors, setColors] = useState(['#0c0e1a', '#182239', '#233239', '#364b4b', '#84937d', '#5f7263', '#729677', '#88a759', '#63996e', '#d4d796'])
@@ -26,12 +27,12 @@ export default function CardLIst() {
   },[])
 
   useEffect(() =>{
-    api.get('/cards')
+    api.get('api/auth/auth')
   }, [])
 
 
   if(!cards) {
-    return<p>Carregando... Esperando a resposta do universo</p>
+    return <Loading />
   }
 
   return(

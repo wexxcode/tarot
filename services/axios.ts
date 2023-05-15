@@ -6,7 +6,7 @@ export function getApiClient(ctx?: GetServerSidePropsContext) {
   const { 'token-tarot':token } = parseCookies(ctx);
 
   const api = axios.create({
-    baseURL: 'http://localhost:3333'
+    baseURL: 'https://64614a23491f9402f4a225b4.mockapi.io/'
   });
 
   api.interceptors.request.use(config => {

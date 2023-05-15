@@ -14,7 +14,7 @@ const Header: React.FC<IHeader> = ({
     <header>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
-          <div className="navbar-brand mx-auto order-lg-1">{title}</div>
+          <div className="navbar-brand mx-auto order-lg-1">{title} - 🚧 Em construção</div>
           {
             user?.name ? <div className="">{user?.name}</div> : ''
           }
