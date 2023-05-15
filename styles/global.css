@@ -48,11 +48,43 @@ li {
   list-style: none;
 }
 
-code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  position: relative;
+  width: 20%;
+  height: 20%;
+  background-image: url('https://i.giphy.com/media/xTk9ZvMnbIiIew7IpW/giphy.webp'); /* Substitua pelo caminho correto para o seu arquivo SVG */
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.loading-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  background-color: #e4f0f0;
+  z-index: 1001;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s;
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+.fade-out {
+  opacity: 0;
+  pointer-events: none;
+  display: none;
 }
